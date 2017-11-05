@@ -22,14 +22,43 @@ import "phoenix_html"
 
 import React from "react"
 import ReactDom from "react-dom"
+import { createStore } from 'redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import MainComponent from "./components/main_component"
+import { Socket } from 'phoenix'
+
+import verbReducer from './reducers/index'
+
+const socket = new Socket('ws://127.0.0.1:4000/socket');
+socket.connect();
+const channel = socket.channel('verb:lobby');
+console.log(channel);
+console.log(socket);
+let verbs = [];
+
+const store = createStore(verbReducer);
+
 
 const App = () => (
   <MuiThemeProvider>
-    <MainComponent />
+    <MainComponent verbs={verbs}/>
   </MuiThemeProvider>
 );
+const render = () => {
+  console.log("-------render", verbs);
+  ReactDom.render(<App />, document.getElementById("page"));
+}
 
-ReactDom.render(<App />, document.getElementById("page"));
+store.subscribe(render);
+
+channel.join()
+  .receive('ok', messages => {
+    console.log('join success', messages);
+    verbs = messages.verbs.data;
+    store.dispatch({ type: 'fetch' })
+  })
+  .receive('error', reason => {
+    console.log('failed join', reason);
+
+  });

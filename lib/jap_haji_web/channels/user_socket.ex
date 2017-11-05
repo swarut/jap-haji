@@ -3,6 +3,7 @@ defmodule JapHajiWeb.UserSocket do
 
   ## Channels
   # channel "room:*", JapHajiWeb.RoomChannel
+  channel "verb:lobby", JapHajiWeb.VerbChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
