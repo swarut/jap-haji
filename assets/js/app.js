@@ -24,9 +24,12 @@ import React from "react"
 import ReactDom from "react-dom"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
+import MainComponent from "./components/main_component"
+
 const App = () => (
   <MuiThemeProvider>
+    <MainComponent />
   </MuiThemeProvider>
 );
 
-ReactDom.render(<App />, document.getElementById("page"))
+ReactDom.render(<App />, document.getElementById("page"));
