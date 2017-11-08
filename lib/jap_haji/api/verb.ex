@@ -18,4 +18,9 @@ defmodule JapHaji.API.Verb do
     |> cast(attrs, [:midashi, :yomi, :kumi])
     |> validate_required([:midashi, :yomi, :kumi])
   end
+
+  def polite(%Verb{} = verb) do
+    verb.midashi
+    |> String.replace_suffix("る", "ます")
+  end
 end
