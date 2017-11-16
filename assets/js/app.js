@@ -29,34 +29,36 @@ import MainComponent from "./components/main_component"
 import { Socket } from 'phoenix'
 
 import verbReducer from './reducers/index'
+import { fetchVerbsAction, addVerbAction, checkYomiAction } from './actions/index'
 
 const socket = new Socket('ws://127.0.0.1:4000/socket');
 socket.connect();
 const channel = socket.channel('verb:lobby');
-console.log(channel);
-console.log(socket);
 let verbs = [];
 
-const store = createStore(verbReducer);
+let store = createStore(verbReducer, [], window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
+const App = () => {
+  let verbs = store.getState()
 
-const App = () => (
-  <MuiThemeProvider>
-    <MainComponent verbs={verbs}/>
-  </MuiThemeProvider>
-);
+  return (
+    <MuiThemeProvider>
+      <MainComponent verbs={verbs} />
+    </MuiThemeProvider>
+  );
+}
 const render = () => {
-  console.log("-------render", verbs);
   ReactDom.render(<App />, document.getElementById("page"));
 }
+
 
 store.subscribe(render);
 
 channel.join()
   .receive('ok', messages => {
-    console.log('join success', messages);
-    verbs = messages.verbs.data;
-    store.dispatch({ type: 'fetch' })
+    // console.log('join success', messages);
+    let v = messages.verbs.data;
+    store.dispatch(fetchVerbsAction(v));
   })
   .receive('error', reason => {
     console.log('failed join', reason);

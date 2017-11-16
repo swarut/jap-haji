@@ -9,7 +9,6 @@ class MainComponent extends React.Component {
   // }
   constructor(props) {
     super(props);
-    console.log("main component props", this.props);
   }
 
   render() {
