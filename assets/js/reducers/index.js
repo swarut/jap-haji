@@ -8,7 +8,7 @@ function verbReducer(state = [], action) {
   switch (action.type) {
     case FETCH_VERB:
       return [
-        ...state,
+        // ...state,
         ...(action.payload.verbs)
       ];
       break;
