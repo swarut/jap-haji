@@ -3,17 +3,15 @@ import ReactDom from "react-dom"
 
 class MainComponent extends React.Component {
 
-  // componentDidMount() {
-  //   let { dispatch } = this.props;
-  //   console.log('-----main component dispatch', dispatch);
-  // }
   constructor(props) {
     super(props);
   }
 
   render() {
     let verbs = this.props.verbs.map( v => {
-      return (<div key={v.yomi}>{v.midashi}</div>);
+      return (
+        <div key={v.yomi}>{v.midashi}</div>
+      );
     });
     return (
 

@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :jap_haji, JapHaji.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "swarut",
+  password: "",
   database: "jap_haji_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

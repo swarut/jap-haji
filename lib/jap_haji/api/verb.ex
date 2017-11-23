@@ -19,8 +19,25 @@ defmodule JapHaji.API.Verb do
     |> validate_required([:midashi, :yomi, :kumi])
   end
 
-  def polite(%Verb{} = verb) do
+  def polite_present(%Verb{} = verb) do
     verb.midashi
     |> String.replace_suffix("る", "ます")
+  end
+
+  # ichidan or verb group 2.
+  def polite_past(%Verb{kumi: "ichidan"} = verb) do
+    verb.midashi
+    |> String.replace_suffix("る", "ました")
+  end
+
+  def polite_past(%Verb{kumi: "godan"} = verb) do
+    verb.midashi
+    # |> String.shift(sa->si)
+    |> String.replace_suffix("", "ました")
+  end
+
+  def polite_past(%Verb{kumi: "irregular"} = verb) do
+    verb.midashi
+    # |> String.replace_suffix("")
   end
 end

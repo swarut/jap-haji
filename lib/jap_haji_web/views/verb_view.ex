@@ -14,6 +14,7 @@ defmodule JapHajiWeb.VerbView do
     %{id: verb.id,
       midashi: verb.midashi,
       yomi: verb.yomi,
-      kumi: verb.kumi}
+      kumi: verb.kumi
+    }
   end
 end
