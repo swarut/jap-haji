@@ -23,10 +23,6 @@ defmodule JapHaji.LangTest do
       assert Lang.shift("あ", :i) == "い"
     end
 
-    test "shift_to_i/1 transform the right character" do
-      assert Lang.shift("あ", :i) == "い"
-    end
-
     test "shift_suffix/2 transforms the suffix character" do
       assert Lang.shift_suffix("話す", :i) == "話し"
     end

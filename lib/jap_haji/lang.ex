@@ -60,13 +60,8 @@ defmodule JapHaji.Lang do
     @hira_rows[row_name][to]
   end
 
-  def shit_to_i(from) do
-    shift(from, :i)
-  end
-
   def shift_suffix(word, to) do
     last = String.last(word)
-    IO.puts("----last #{last}")
     String.replace_suffix(word, last, shift(last, to))
   end
 

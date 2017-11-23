@@ -4,8 +4,8 @@ defmodule JapHajiWeb.VerbControllerTest do
   alias JapHaji.API
   alias JapHaji.API.Verb
 
-  @create_attrs %{kumi: "some kumi", midashi: "some midashi", yomi: "some yomi"}
-  @update_attrs %{kumi: "some updated kumi", midashi: "some updated midashi", yomi: "some updated yomi"}
+  @create_attrs %{kumi: "ichidan",   midashi: "食べる", yomi: "たべる"}
+  @update_attrs %{kumi: "ichidan",   midashi: "食べる", yomi: "たべる"}
   @invalid_attrs %{kumi: nil, midashi: nil, yomi: nil}
 
   def fixture(:verb) do
@@ -32,9 +32,11 @@ defmodule JapHajiWeb.VerbControllerTest do
       conn = get conn, verb_path(conn, :show, id)
       assert json_response(conn, 200)["data"] == %{
         "id" => id,
-        "kumi" => "some kumi",
-        "midashi" => "some midashi",
-        "yomi" => "some yomi"}
+        "kumi" => "ichidan",
+        "midashi" => "食べる",
+        "yomi" => "たべる",
+        "polite_present" => "食べます"
+      }
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -53,9 +55,11 @@ defmodule JapHajiWeb.VerbControllerTest do
       conn = get conn, verb_path(conn, :show, id)
       assert json_response(conn, 200)["data"] == %{
         "id" => id,
-        "kumi" => "some updated kumi",
-        "midashi" => "some updated midashi",
-        "yomi" => "some updated yomi"}
+        "kumi" => "ichidan",
+        "midashi" => "食べる",
+        "yomi" => "たべる",
+        "polite_present" => "食べます"
+      }
     end
 
     test "renders errors when data is invalid", %{conn: conn, verb: verb} do
