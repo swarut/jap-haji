@@ -1,9 +1,12 @@
 defmodule JapHaji.API.Verb do
+
   use Ecto.Schema
+
   import Ecto.Changeset
+  import JpKatsuyou
+
   alias JapHaji.API.Verb
   alias JapHaji.Lang
-
 
   schema "verbs" do
     field :kumi, :string
@@ -22,7 +25,7 @@ defmodule JapHaji.API.Verb do
 
   def polite_present(%Verb{ kumi: "godan" } = verb) do
     verb.midashi
-    |> Lang.shift_suffix(:i)
+    |> shift_suffix(:i)
     |> String.replace_suffix("", "ます")
   end
 
